@@ -1,0 +1,414 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+  <script src="./jquery-3.5.1.min.js"></script>
+  <script src="./jquery-ui.js"></script>
+
+    <script src="touch.js"></script> 
+     <script src="./cong.js" defer></script>
+     <link rel="stylesheet" href="style.css">
+    <title>Interactive</title>
+    <style>
+      .congrats {
+  position: absolute;
+  top: 140px;
+  width: 550px;
+  height: 100px;
+  padding: 20px 10px;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+h1 {
+  transform-origin: 50% 50%;
+  font-size: 50px;
+  font-family: 'Sigmar One', cursive;
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.blob {
+  height: 50px;
+  width: 50px;
+  color: #ffcc00;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  z-index: 1;
+  font-size: 30px;
+  display: none;  
+}
+      html{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+      }
+        body{
+          cursor: auto;
+    position: relative;
+    height: max-content;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+        }
+        #containers{
+            display:block;
+            width:100vw;
+            height: 50vw;
+            background-image: url(./img/3649732.jpg);
+            background-size: 130vw;
+            overflow: hidden;
+            
+        }
+        .head{width: 60vw;
+    margin: 3vw 25vw;
+    margin-bottom: 1.8vw;
+    position: relative;}
+        
+        table, th, td {
+           border: 0.12vw solid #04c6ad96;
+           border-collapse: collapse;
+           text-align:center;
+           padding:0.9vw 0.5vw;
+            }
+        .tag{   width: 71vw;
+    height: 13vw;
+    margin: 0 18vw;
+    opacity: 0.9;
+    user-select: none;
+    margin-top: 0vw;
+    -webkit-user-drag: none;   }   
+  
+         table tr td{height:4.15vw}   
+         table tr td:hover{background-color: rgba(127, 255, 212, 0.445);} 
+         #items{
+    width: 50vw;
+    position: absolute;
+    font-size: 2.2vw;
+    display: block;
+    left: 33.66vw;
+    top: 14vw;} 
+    .grabPer,.grabAni,.grabThing,.grabPlace{cursor: grab;user-select: none;}
+    .openbook{       position: absolute;
+    left: 14vw;
+    top: 0vw;
+    width: 9vw;}
+    table{
+        margin-top: 2vw;
+        transform: scale(0.9);
+        font-size: 2.1vw;
+      }
+      .popup {
+    display: none;
+    position: fixed;
+    padding: 10px;
+    width: 280px;
+    left: 50%;
+    margin-left: -150px;
+    height: 180px;
+    top: 50%;
+    margin-top: -100px;
+    background: #FFF;
+    z-index: 20;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: system-ui;
+    font-size: 22px;
+    background-color: #ffffebe6;
+    border-radius: 3vw;
+  }
+  
+  #popup1 {
+    -webkit-box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+    box-shadow:  0px 0px 0px 9999px rgb(132 132 132 / 71%);
+  }
+  .popup a{
+    text-decoration: wavy;
+    color: darkgreen;
+  }
+  #logo{
+    position: absolute;
+    width: 11vw;
+    top: 2vw;
+    right: 2vw;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+    @media only screen and (max-width:1000px) {
+      
+      #items{
+        font-size: 2vw;
+      }
+      .head{    width: 59vw;
+    margin: 2.6vw 25vw;
+    position: relative;}
+      .tag{
+      }
+      table{
+        margin-top: -0.3vw;
+    font-size: 2.1vw;
+      }
+      #container{
+       
+      }
+
+    }
+    </style>
+</head>
+<body>
+    <div id="containers">
+      <img src="./img/b_1.png" id="home">
+    <img src="./img/Logo.jpg" id="logo">  
+      <div class="js-container container" style="top:0px !important;" id="jscon"></div>
+
+  <div id='cong' style="text-align:center;margin-top:30px;display:none;position:  fixed;width:100%;height:100%;top:20vw;left:5vw;">
+    <img src="./img/congo.png" id="congra" style="top: -8vw;width:25vw">
+    <button class="submit-btn" type="submit" onclick="location.reload()">Reset</button>
+  </div>  
+      <div class="popup" id="popup1">
+        <p>Interactive Lesson</p>
+        <p style="margin-top:0">Want to continue on <b>mobile</b> device ?</p>
+        <a href="#" onclick="openFullscreen()">Yes !</a>
+      </div>
+        <img src="./img/ezgif.com-gif-maker.gif" class="openbook">
+        <img src="./img/Header.png" class="head">
+        <img src="./img/bg.png" class="tag">
+        <div id="items">
+          <span class="grabPer" style="padding-right: 3.6vw;">mother</span>
+            <span class="grabAni" style="padding-right: 2.25vw;">horse</span>
+            <span class="grabThing" style="padding-right: 4.34vw;">book</span>
+            <span class="grabPlace" style="padding-right: 3.43vw;">market</span>
+            <br>
+            <span class="grabPer" style="position: relative;
+            left: -3vw;">brother</span>
+            
+            <span class="grabPlace" style= "padding-right: 2.3vw;
+            padding-top: 0.8vw;
+            width: max-content;
+            display: inline-block;
+            letter-spacing: -0.03vw;">hospital</span>
+            <span class="grabThing" style="padding-right: 3.5vw;">tree</span>
+            <span class="grabAni" style="padding-right: 2vw;">peacock</span>
+            <span class="grabPer" style="padding-right: 3.83vw;">doctor</span>
+            <br>
+            <span class="grabAni" style="position: relative;
+            left: -7vw;">rabbit</span>
+            
+            <span class="grabThing" style= "padding-right: 1.4vw;
+            position: relative;
+            left: -3vw;
+            padding-top: 0.6vw;
+            width: max-content;
+            display: inline-block;
+            letter-spacing: -0.09vw;">cycle</span>
+            <span class="grabPlace" style="padding-right: 2.9vw;">park</span>
+            <span style="padding-right: 4vw;
+            user-select: none;
+            color: #0018169c;">shoes</span>
+            <span class="grabAni" style="padding-right: 2.28vw;
+            letter-spacing: -0.009vw;">butterfly</span>
+            <span style="letter-spacing: -0.04vw;
+            user-select: none;
+            color: #0018169c;">teachers</span>
+        </div>
+        <table style="    width: 75vw;
+        margin-left:16vw;       ">
+            <tr>
+              <th style='width:20%;background-color: #40b99070;'>Person</th>
+              <th style='width:20%;background-color: #40b99070;'>Place</th> 
+              <th style='width:20%;background-color: #40b99070;'>Animal</th>
+              <th style='width:20%;background-color: #40b99070;'>Thing</th>
+            </tr>
+            <tr>
+              <td>teachers</td>
+              <td class="tPlace"></td>
+              <td class="tAni"></td>
+              <td>shoes</td>
+            </tr>
+            <tr>
+              <td class="tPer"></td>
+              <td class="tPlace"></td>
+              <td class="tAni"></td>
+              <td class="tThing"></td>
+            </tr>
+            <tr>
+              <td class="tPer"></td>
+              <td class="tPlace"></td>
+              <td class="tAni"></td>
+              <td class="tThing"></td>
+            </tr>
+            <tr>
+              <td class="tPer"></td>
+              <td class="tPlace"></td>
+              <td class="tAni"></td>
+              <td class="tThing"></td>
+            </tr>
+          </table>
+    </div>
+
+
+
+<script>
+
+
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    document.getElementById('popup1').style.display = 'flex';}
+if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){
+    document.getElementById('popup1').style.display = 'none';}
+
+var elem = document.body;
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+    document.getElementById('popup1').style.display = 'none';
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+    document.getElementById('popup1').style.display = 'none';
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+    document.getElementById('popup1').style.display = 'none';
+  }
+}
+
+$( function() {
+  
+    $('.grabPer').draggable({helper:'clone'},
+  {cursor: "grabbing"}
+  );
+  $('.grabAni').draggable({helper:'clone'},
+  {cursor: "grabbing"}
+  );
+  $('.grabThing').draggable({helper:'clone'},
+  {cursor: "grabbing"}
+  );
+  $('.grabPlace').draggable({helper:'clone'},
+  {cursor: "grabbing"}
+  );
+        $('.tPer').droppable(
+            {
+                accept: '.grabPer',
+                drop: function(ev,ui){
+                    var dropp = $(ui.draggable).clone().text();
+                    var dropTrue = true;
+                    var a = document.getElementsByClassName('tPer');
+                    for (let i = 0; i < a.length; i++) {
+                      if($(a[i]).text() == dropp){
+                        dropTrue = false;
+                      } 
+                    }
+                    if(dropTrue==true &&  $(ev.target).attr('d')!=='no'){
+                      $(this).text(dropp);
+                      score++;
+                      chk()
+                      $(ev.target).attr('d','no')
+                      $(ui.draggable).css({'opacity':'0.6','color': '#0018169c'})
+                      $(ui.draggable).draggable({disabled:true});
+                    } 
+                },
+            },
+        )
+        $('.tAni').droppable(
+            {
+                accept: '.grabAni',
+                drop: function(ev,ui){
+                    var dropp = $(ui.draggable).clone().text();
+                    var dropTrue = true;
+                    var a = document.getElementsByClassName('tAni');
+                    for (let i = 0; i < a.length; i++) {
+                      if($(a[i]).text() == dropp){
+                        dropTrue = false;
+                      } 
+                    }
+                    if(dropTrue==true &&  $(ev.target).attr('d')!=='no'){
+                      $(this).text(dropp);
+                      score++;
+                      chk()
+                      $(ev.target).attr('d','no')
+                      $(ui.draggable).css({'opacity':'0.6','color': '#0018169c'})
+                      $(ui.draggable).draggable({disabled:true});
+                    } 
+                }
+            }
+        )
+        $('.tThing').droppable(
+            {
+                accept: '.grabThing',
+                drop: function(ev,ui){
+                    var dropp = $(ui.draggable).clone().text();
+                    var dropTrue = true;
+                    var a = document.getElementsByClassName('tThing');
+                    for (let i = 0; i < a.length; i++) {
+                      if($(a[i]).text() == dropp){
+                        dropTrue = false;
+                      } 
+                    }
+                    if(dropTrue==true &&  $(ev.target).attr('d')!=='no'){
+                      $(this).text(dropp);
+                      score++;
+                      chk()
+                      $(ev.target).attr('d','no')
+                      $(ui.draggable).css({'opacity':'0.6','color': '#0018169c'})
+                      $(ui.draggable).draggable({disabled:true});
+                    }  
+                }
+            }
+        )
+        $('.tPlace').droppable(
+            {
+                accept: '.grabPlace',
+                drop: function(ev,ui){
+                    var dropp = $(ui.draggable).clone().text();
+                    var dropTrue = true;
+                    var a = document.getElementsByClassName('tPlace');
+                    for (let i = 0; i < a.length; i++) {
+                      if($(a[i]).text() == dropp){
+                        dropTrue = false;
+                      } 
+                    }
+                    if(dropTrue==true &&  $(ev.target).attr('d')!=='no'){
+                      $(this).text(dropp);
+                      score++;
+                      chk()
+                      $(ev.target).attr('d','no')
+                      $(ui.draggable).css({'opacity':'0.6','color': '#0018169c'})
+                      $(ui.draggable).draggable({disabled:true});
+                    }  
+                }
+            }
+        )
+        } );
+
+var score=0;
+function end(){
+  $('#items').css('display','none')
+  $('.openbook').fadeOut()
+  $('#jscon').css('display','block')
+  $('#jscon').css('backdrop-filter','blur(10px)')
+  $('#cong').css('display','block')
+ 
+  window.confettiful = new Confettiful(document.querySelector('.js-container'));
+}
+function chk(){
+  if(score>12){
+    setTimeout(()=>{end()},300)
+  }
+}
+document.getElementById('home').addEventListener('click',()=>{
+        window.close()
+    })
+</script>
+
+
+
+</body>
+</html>
